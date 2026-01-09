@@ -6,14 +6,11 @@
 
 MatterColorLight ColorLight;
 Preferences matterPref;
-
-const char *ssid = "BrandstorpWifi";
-const char *password = "Brandstorp";
+const char *ssid = WIFI_SSID;
+const char *password = WIFI_PASSWORD;
 const char *onOffPrefKey = "OnOff";
 const char *hsvColorPrefKey = "HSV";
 
-#define LED_PIN     4
-#define NUM_LEDS    30
 #define BRIGHTNESS  100
 #define LED_TYPE    WS2812B
 #define COLOR_ORDER GRB
@@ -41,6 +38,7 @@ bool setLightState(bool state, espHsvColor_t colorHSV) {
 void setup() {
   FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
   FastLED.setBrightness(BRIGHTNESS);
+  FastLED.setMaxPowerInVoltsAndMilliamps(5, 2000);
   Serial.begin(115200);
   delay(2000);
 
